@@ -3,6 +3,8 @@ import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
+const BASE_URL = "https://eventapp-j85f.onrender.com";
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,15 +16,15 @@ export default function Login() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        `${BASE_URL}/api/auth/login`,
         { email, password }
       );
 
-      login(res.data.token); // Save token
-      navigate("/dashboard"); // Redirect
+      login(res.data.token);
+      navigate("/dashboard");
 
     } catch (error) {
-      alert("Invalid credentials");
+      alert(error.response?.data?.message || "Invalid credentials");
     }
   };
 
@@ -36,6 +38,7 @@ export default function Login() {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
         <br /><br />
 
@@ -44,6 +47,7 @@ export default function Login() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
         <br /><br />
 

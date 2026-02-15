@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const BASE_URL = "https://eventapp-j85f.onrender.com";
+
 export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -14,7 +16,7 @@ export default function Register() {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/auth/register",
+        `${BASE_URL}/api/auth/register`,
         { name, email, password }
       );
 
@@ -36,42 +38,29 @@ export default function Register() {
           placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          style={{ padding: "8px", width: "100%", marginBottom: "10px" }}
           required
         />
+        <br /><br />
 
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          style={{ padding: "8px", width: "100%", marginBottom: "10px" }}
           required
         />
+        <br /><br />
 
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          style={{ padding: "8px", width: "100%", marginBottom: "10px" }}
           required
         />
+        <br /><br />
 
-        <button
-          type="submit"
-          style={{
-            padding: "10px",
-            width: "100%",
-            backgroundColor: "#007bff",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-        >
-          Register
-        </button>
+        <button type="submit">Register</button>
       </form>
     </div>
   );

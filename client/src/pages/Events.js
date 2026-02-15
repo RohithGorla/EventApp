@@ -3,6 +3,8 @@ import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
+const BASE_URL = "https://eventapp-j85f.onrender.com";
+
 export default function Events() {
   const [events, setEvents] = useState([]);
   const [search, setSearch] = useState("");
@@ -16,7 +18,7 @@ export default function Events() {
     const fetchEvents = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/events",
+          `${BASE_URL}/api/events`,
           {
             params: { search, category, location },
           }
@@ -38,7 +40,7 @@ export default function Events() {
 
     try {
       await axios.post(
-        `http://localhost:5000/api/registrations/${eventId}`,
+        `${BASE_URL}/api/registrations/${eventId}`,
         {},
         {
           headers: {
@@ -55,10 +57,8 @@ export default function Events() {
 
   return (
     <div style={{ padding: "40px", maxWidth: "900px", margin: "auto" }}>
-      
       <h1 style={{ textAlign: "center" }}>Event Discovery</h1>
 
-      {/* Show Dashboard Button if Logged In */}
       {token && (
         <div style={{ textAlign: "right", marginBottom: "15px" }}>
           <button
@@ -77,7 +77,6 @@ export default function Events() {
         </div>
       )}
 
-      {/* Search & Filters */}
       <div style={{ marginBottom: "25px" }}>
         <input
           type="text"
@@ -109,7 +108,6 @@ export default function Events() {
         </select>
       </div>
 
-      {/* Event Cards */}
       {events.length === 0 && <p>No events found.</p>}
 
       {events.map((event) => (
