@@ -1,1 +1,1 @@
-https://github.com/RohithGorla/EventApp
+Link:https://event-app-eight-kappa.vercel.app/
